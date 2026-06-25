@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴黎 · 法式奢华之巅</title>
+    <!-- Google Fonts 优雅字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- 全局奢华风格重置 ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0908;
+            color: #e8e3d9;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        /* 香槟金色主色调 */
+        :root {
+            --gold: #c9a96e;
+            --gold-light: #e8d5a3;
+            --gold-dark: #a4844c;
+            --dark-bg: #0a0908;
+            --card-bg: #151210;
+            --border-glow: rgba(201, 169, 110, 0.25);
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: #0a0908;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ---------- 装饰分割线 ---------- */
+        .gold-divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px auto 20px;
+        }
+        .gold-divider.light {
+            background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+        }
+
+        /* ---------- 头部 / 学生信息 (奢华卡片) ---------- */
+        .student-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0 20px;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .student-header .title-main {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 3.8rem);
+            font-weight: 700;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #f5e6c8, var(--gold), #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(201, 169, 110, 0.15);
+        }
+
+        .student-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #a89882;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px 25px;
+            border: 1px solid rgba(201, 169, 110, 0.15);
+            backdrop-filter: blur(4px);
+        }
+
+        .student-info span {
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-left: 6px;
+        }
+
+        /* ---------- 全屏英雄区 ---------- */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 60px;
+            overflow: hidden;
+            border-radius: 0 0 40px 40px;
+            background: #0a0908;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=1400&q=80') center/cover no-repeat;
+            filter: brightness(0.45) saturate(1.2);
+            transform: scale(1.02);
+            transition: transform 8s ease;
+        }
+
+        .hero:hover .hero-bg {
+            transform: scale(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(10, 9, 8, 0.75) 90%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: #fff;
+            text-shadow: 0 4px 60px rgba(0, 0, 0, 0.7);
+            margin-bottom: 10px;
+        }
+
+        .hero-content h1 em {
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 400;
+            text-shadow: 0 0 30px rgba(201, 169, 110, 0.3);
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            border-top: 1px solid rgba(201, 169, 110, 0.3);
+            border-bottom: 1px solid rgba(201, 169, 110, 0.3);
+            display: inline-block;
+            padding: 12px 30px;
+            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            animation: floatDown 2.4s ease-in-out infinite;
+        }
+
+        @keyframes floatDown {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+                opacity: 1;
+            }
+        }
+
+        /* ---------- 通用章节样式 ---------- */
+        section {
+            padding: 70px 0;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .section-title .gold {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            color: #9a8b7a;
+            max-width: 700px;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ---------- 布局：双栏图文 ---------- */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .two-col.reverse {
+            direction: rtl;
+        }
+        .two-col.reverse>* {
+            direction: ltr;
+        }
+
+        .text-block p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #d4ccc2;
+        }
+
+        .text-block p:first-of-type {
+            font-size: 1.15rem;
+            color: #f0ebe3;
+        }
+
+        /* ---------- 视频与图片容器 ---------- */
+        .media-block {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 169, 110, 0.15);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            position: relative;
+        }
+
+        .media-block:hover {
+            transform: scale(1.01);
+            box-shadow: 0 30px 80px rgba(201, 169, 110, 0.15), 0 0 0 2px rgba(201, 169, 110, 0.2);
+        }
+
+        .media-block iframe,
+        .media-block img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: none;
+            object-fit: cover;
+        }
+
+        .media-block img {
+            transition: transform 0.8s ease;
+        }
+
+        .media-block:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ---------- 三栏特色卡片（文化 / 时尚 / 美食） ---------- */
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .culture-card {
+            background: var(--card-bg);
+            padding: 40px 30px 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 169, 110, 0.1);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(201, 169, 110, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(201, 169, 110, 0.05);
+        }
+
+        .culture-card:hover::before {
+            opacity: 1;
+        }
+
+        .culture-card .icon {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 4px 12px rgba(201, 169, 110, 0.2));
+        }
+
+        .culture-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+        }
+
+        .culture-card p {
+            font-size: 0.95rem;
+            color: #b8ad9e;
+            line-height: 1.8;
+        }
+
+        .culture-card .highlight {
+            color: #fff;
+            font-weight: 400;
+        }
+
+        /* ---------- 景点卡片（横向） ---------- */
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .attraction-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 169, 110, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .attraction-item:hover {
+            border-color: rgba(201, 169, 110, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .attraction-item .media-block {
+            border-radius: 0;
+            box-shadow: none;
+            aspect-ratio: 16 / 9;
+        }
+
+        .attraction-item .media-block:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .attraction-content {
+            padding: 28px 30px;
+        }
+
+        .attraction-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .attraction-content h3 span {
+            color: var(--gold);
+        }
+
+        .attraction-content p {
+            color: #c5baab;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- 结论区（华丽收尾） ---------- */
+        .conclusion-box {
+            background: linear-gradient(145deg, #151210, #0f0d0b);
+            padding: 60px 70px;
+            border-radius: 30px;
+            border: 1px solid rgba(201, 169, 110, 0.15);
+            box-shadow: inset 0 0 60px rgba(201, 169, 110, 0.02);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .conclusion-box p {
+            font-size: 1.25rem;
+            max-width: 850px;
+            margin: 0 auto;
+            color: #ddd6cb;
+            line-height: 2;
+        }
+
+        .conclusion-box .gold-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        /* ---------- 页脚 ---------- */
+        .footer {
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 1px solid rgba(201, 169, 110, 0.08);
+            margin-top: 40px;
+            color: #5a5044;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .gold-dot {
+            color: var(--gold);
+            margin: 0 10px;
+        }
+
+        /* ---------- 响应式 ---------- */
+        @media (max-width: 1024px) {
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .two-col.reverse {
+                direction: ltr;
+            }
+            .culture-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .attractions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .student-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .student-info {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+            .conclusion-box {
+                padding: 40px 20px;
+            }
+            .hero {
+                height: 70vh;
+                border-radius: 0 0 20px 20px;
+            }
+            .hero-content h1 {
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .student-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== 头部：标题 + 学生信息 ===== -->
+        <header class="student-header">
+            <div class="title-main">PARIS</div>
+            <div class="student-info">
+                <div>Name <span>MiaoHe</span></div>
+                <div>ID <span>2300880141</span></div>
+                <div>Class <span>Class A</span></div>
+                <div>Group <span>Group 2</span></div>
+            </div>
+        </header>
+
+        <!-- ===== 英雄区（全屏震撼） ===== -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>THE HEART OF <em>FRENCH</em> TOURISM</h1>
+                <div class="gold-divider light" style="margin: 20px auto;"></div>
+                <div class="hero-sub">City of Light · Élégance · Art de Vivre</div>
+            </div>
+            <div class="scroll-indicator">⌄ 探索巴黎 ⌄</div>
+        </section>
+
+        <!-- ===== Section 1: Discover Paris ===== -->
+        <section>
+            <div class="two-col">
+                <div class="text-block">
+                    <h2 class="section-title">Discover <span class="gold">Paris</span></h2>
+                    <div class="gold-divider" style="margin: 0 0 25px 0;"></div>
+                    <p>Paris, the capital of France, is one of the world's most influential tourism destinations. Located along the Seine River in northern France, the city welcomes millions of international visitors each year.</p>
+                    <p>Often referred to as the <strong style="color: var(--gold-light);">"City of Light"</strong>, Paris is renowned for its rich history, elegant architecture, world-class museums, and vibrant cultural atmosphere. The city offers visitors a unique opportunity to experience both historical heritage and modern urban life in one destination.</p>
+                </div>
+                <div class="media-block">
+                    <!-- Discover Paris 视频 - 已替换为指定YouTube视频 -->
+                    <iframe src="https://www.youtube.com/embed/AQ6GmpMu5L8?rel=0&modestbranding=1" title="Discover Paris video" allowfullscreen loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Section 2: World-Famous Attractions ===== -->
+        <section>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 class="section-title">World-Famous <span class="gold">Attractions</span></h2>
+                <div class="gold-divider"></div>
+            </div>
+
+            <div class="attractions-grid">
+                <!-- 埃菲尔铁塔 -->
+                <div class="attraction-item">
+                    <div class="media-block">
+                        <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800&q=80" alt="Eiffel Tower at twilight" loading="lazy">
+                    </div>
+                    <div class="attraction-content">
+                        <h3>Eiffel <span>Tower</span></h3>
+                        <p>Located on the Champ de Mars, standing at <strong style="color: #fff;">330 metres</strong> tall, it offers breathtaking panoramic views and has become a global symbol of France. Visitors enjoy observation decks, restaurants, and spectacular evening light displays.</p>
+                    </div>
+                </div>
+                <!-- 卢浮宫 - 已替换为更高质量图片 -->
+                <div class="attraction-item">
+                    <div class="media-block">
+                        <img src="https://images.unsplash.com/photo-1565364144526-4f24e1be19e3?w=800&q=80" alt="Louvre Museum glass pyramid at night" loading="lazy">
+                    </div>
+                    <div class="attraction-content">
+                        <h3>Louvre <span>Museum</span></h3>
+                        <p>Housed in central Paris near the Seine, it is the <strong style="color: #fff;">world's largest art museum</strong> with over 35,000 artworks including the <em>Mona Lisa</em> and <em>Venus de Milo</em>. A true pilgrimage for art lovers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.02); padding: 25px 30px; border-radius: 16px; border-left: 3px solid var(--gold); margin-top: 10px;">
+                <p style="color: #d4ccc2; margin: 0; font-size: 1rem;">
+                    <span style="color: var(--gold-light); font-weight: 400;">✦</span> Visitors can also explore the <strong style="color: #fff;">Notre-Dame Cathedral</strong> and the <strong style="color: #fff;">Arc de Triomphe</strong>, both of which showcase the city's rich architectural and historical heritage.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== Section 3: Parisian Culture and Lifestyle ===== -->
+        <section>
+            <div style="text-align: center; margin-bottom: 10px;">
+                <h2 class="section-title">Parisian Culture &amp; <span class="gold">Lifestyle</span></h2>
+                <div class="gold-divider"></div>
+                <p class="section-sub" style="margin: 0 auto 40px;">Paris is internationally recognised as a centre of <strong style="color: #fff;">art, fashion, and gastronomy</strong> — the pillars of French elegance.</p>
+            </div>
+
+            <div class="culture-grid">
+                <!-- 艺术 -->
+                <div class="culture-card">
+                    <span class="icon">🎨</span>
+                    <h3>Artistic Capital</h3>
+                    <p>Home to the Louvre and Musée d'Orsay, displaying masterpieces from Monet, Picasso, and Van Gogh. Walking through Montmartre, visitors feel the <span class="highlight">bohemian energy</span> that fueled the modern art movement.</p>
+                </div>
+                <!-- 时尚 -->
+                <div class="culture-card">
+                    <span class="icon">👗</span>
+                    <h3>Fashion &amp; Luxury</h3>
+                    <p>Paris is synonymous with <span class="highlight">Chanel, Dior, and Louis Vuitton</span>. Paris Fashion Week attracts designers and celebrities worldwide, cementing the city's status as a global trendsetter.</p>
+                </div>
+                <!-- 美食 -->
+                <div class="culture-card">
+                    <span class="icon">🍷</span>
+                    <h3>Gastronomy</h3>
+                    <p>Dining in Paris is a cultural experience. From <span class="highlight">croissants and macarons</span> to escargots and fine wines, every meal is a celebration of French <em>savoir-faire</em>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Section 4: Why Paris Remains a Leading Tourism Destination ===== -->
+        <section>
+            <div class="two-col reverse">
+                <div class="media-block">
+                    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80" alt="Paris street café lifestyle" loading="lazy">
+                </div>
+                <div class="text-block">
+                    <h2 class="section-title">Why Paris <span class="gold">Remains</span> a Leading Destination</h2>
+                    <div class="gold-divider" style="margin: 0 0 25px 0;"></div>
+                    <p>Paris offers more than sightseeing. The city combines <strong style="color: #fff;">cultural heritage, artistic excellence, culinary experiences, and modern tourism infrastructure</strong>.</p>
+                    <p>Its efficient public transport system, diverse accommodation options, and international accessibility make it easy for visitors to explore. Whether tourists are interested in history, art, shopping, food, or architecture, Paris provides <span style="color: var(--gold-light);">unforgettable experiences</span> that appeal to a wide range of travellers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Conclusion ===== -->
+        <section style="padding-bottom: 30px;">
+            <div class="conclusion-box">
+                <div class="gold-quote">✦ ✦ ✦</div>
+                <h2 class="section-title" style="font-size: clamp(2rem, 3vw, 2.8rem); margin-bottom: 20px;">The <span class="gold">Eternal</span> Allure</h2>
+                <p>
+                    Paris remains one of the world's most attractive tourism destinations because of its iconic landmarks, cultural richness, and unique atmosphere.
+                    <br><br>
+                    A visit to Paris allows travellers to experience the very essence of French history, creativity, and lifestyle, making it a destination that continues to inspire visitors from across the globe.
+                </p>
+                <div class="gold-divider" style="margin: 30px auto 0;"></div>
+                <div style="margin-top: 20px; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 6px;">
+                    LA VIE EST BELLE
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Footer ===== -->
+        <footer class="footer">
+            <span>PARIS · THE HEART OF FRENCH TOURISM</span>
+            <span class="gold-dot">✦</span>
+            <span>Élégance &amp; Inspiration</span>
+            <br>
+            <span style="font-size: 0.7rem; opacity: 0.5;">© 2026 · Designed in the spirit of luxury</span>
+        </footer>
+
+    </div>
+    <!-- container end -->
+
+</body>
+</html>
